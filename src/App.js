@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { lazy, Suspense } from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { ConnectedRouter, routerMiddleware } from 'connected-react-router';
+import { Provider } from 'react-redux';
+import store from './redux/store.js';
+import history from '@/utils/history';
+// import { setAxiosBase } from '@utils/handleAxios'
+import { layoutRouteList } from './router/utils';
+import './App.less';
 
-function App() {
+// 设置axios拦截器
+// setAxiosBase()
+
+
+const App = () => {
+  console.dir('systemRouteList',layoutRouteList)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Switch>
+            {layoutRouteList.map((route) => (
+              <Route
+                key={route.path}
+                path={route.path}
+                component={route.component}
+                redirect={route.redirect}
+              />
+            ))}
+          </Switch>
+        </Suspense>
+      </ConnectedRouter>
+    </Provider>
   );
-}
+};
 
 export default App;
