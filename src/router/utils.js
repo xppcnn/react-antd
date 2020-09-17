@@ -1,6 +1,7 @@
+import React from 'react';
 import routes from './config';
 import config from '../config';
-
+import * as allIcons from '@ant-design/icons/es';
 /**
  *
  * 将路由转换为一维数组
@@ -63,9 +64,9 @@ export const businessRouteList = getBusinessRouteList();
 
 export const systemRouteList = getSystemRouteList();
 
-function findRoutesByPaths(pathList, routeList, basename) {
+function findRoutesByPaths(pathList, routeList) {
   return routeList.filter(
-    (child) => pathList.indexOf((basename || '') + child.path) !== -1,
+    (child) => pathList.indexOf(child.path) !== -1,
   );
 }
 
@@ -86,5 +87,37 @@ export function getPagePathList(pathname) {
  * 只有业务路由会有面包屑
  */
 export function getBreadcrumbs() {
-  return findRoutesByPaths(getPagePathList(), businessRouteList, config.BASENAME);
+  return findRoutesByPaths(getPagePathList(), businessRouteList);
 }
+
+
+// 菜单图标
+const toHump = (name) =>
+  name.replace(/-(\w)/g, (all, letter) => letter.toUpperCase());
+
+export const formatterIcon = (data) => {
+  data.forEach(item => {
+    if (item.meta.icon) {
+      const { icon } = item.meta;
+      const v4IconName = toHump(icon.replace(icon[0], icon[0].toUpperCase()));
+      const NewIcon = allIcons[icon] || allIcons[''.concat(v4IconName, 'Outlined')];
+
+      if (NewIcon) {
+        try {
+          // eslint-disable-next-line no-param-reassign
+          item.meta.icon = React.createElement(NewIcon);
+        } catch (error) {
+          // eslint-disable-next-line no-console
+          console.log(error);
+        }
+      }
+    }
+
+    if (item.routes || item.children) {
+      const children = formatterIcon(item.routes || item.children); // Reduce memory usage
+      // eslint-disable-next-line no-param-reassign
+      item.children = children;
+    }
+  });
+  return data;
+};

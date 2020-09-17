@@ -1,6 +1,6 @@
-import React, { lazy, Suspense } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import { ConnectedRouter, routerMiddleware } from 'connected-react-router';
+import React, { Suspense } from 'react';
+import { Switch, Route } from 'react-router-dom';
+import { ConnectedRouter,  } from 'connected-react-router';
 import { Provider } from 'react-redux';
 import store from './redux/store.js';
 import history from '@/utils/history';

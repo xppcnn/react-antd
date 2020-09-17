@@ -4,9 +4,9 @@ import { Spin } from 'antd';
 import { connect } from 'react-redux'
 import './BaseLayout.less';
 import Sidebar from '@components/LayoutSideBar';
-// import Header from '../components/LayoutHeader';
+import Header from '../components/LayoutHeader';
 import LayoutSettings from '../components/LayoutSettings';
-// import MainRoutes from './MainRoutes';
+import MainRoutes from './MainRoutes';
 
 function Layout(props) {
   return (
@@ -19,7 +19,7 @@ function Layout(props) {
         })}
       >
         {props.layout === 'side' && <Sidebar />}
-        {/* <section className={classnames('layout__main')}>
+        <section className={classnames('layout__main')}>
           <Header />
           <div
             className={classnames('layout__container', {
@@ -31,7 +31,7 @@ function Layout(props) {
               <MainRoutes />
             </Suspense>
           </div>
-        </section> */}
+        </section>
         <LayoutSettings />
       </section>
     </>

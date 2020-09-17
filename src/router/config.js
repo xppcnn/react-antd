@@ -46,57 +46,57 @@ const routes = [
     ],
   },
   {
-    path: '/home',
+    path: '/',
     component: React.lazy(() => import('../layout/BaseLayout')),
     meta: {
       title: '首页',
     },
-    // redirect: '/home',
+    redirect: '/home',
     children: [
-      // {
-      //   path: '/home',
-      //   meta: {
-      //     title: '首页',
-      //     icon: 'dashborad',
-      //   },
-      //   component: React.lazy(() => import('../pages/Sys/Demo')),
-      // },
+      {
+        path: '/home',
+        meta: {
+          title: '首页',
+          icon: 'dashborad',
+        },
+        component: React.lazy(() => import('../pages/Sys/Demo')),
+      },
 
       // 以下菜单为系统权限管理
-      // {
-      //   path: '/auth',
-      //   meta: {
-      //     title: '权限管理',
-      //     icon: 'setting',
-      //   },
-      //   redirect: '/auth/menu',
-      //   children: [
-      //     {
-      //       path: '/auth/menu',
-      //       meta: {
-      //         title: '菜单管理',
-      //         icon: 'menu',
-      //       },
-      //       component: React.lazy(() => import('../views/auth/menu')),
-      //     },
-      //     {
-      //       path: '/auth/role',
-      //       meta: {
-      //         title: '角色管理',
-      //         icon: 'team',
-      //       },
-      //       component: React.lazy(() => import('../views/auth/role')),
-      //     },
-      //     {
-      //       path: '/auth/user',
-      //       meta: {
-      //         title: '用户管理',
-      //         icon: 'user',
-      //       },
-      //       component: React.lazy(() => import('../views/auth/user')),
-      //     },
-      //   ],
-      // },
+      {
+        path: '/auth',
+        meta: {
+          title: '权限管理',
+          icon: 'setting',
+        },
+        redirect: '/auth/menu',
+        children: [
+          {
+            path: '/auth/menu',
+            meta: {
+              title: '菜单管理',
+              icon: 'menu',
+            },
+            component: React.lazy(() => import('../pages/Sys/Demo')),
+          },
+          {
+            path: '/auth/role',
+            meta: {
+              title: '角色管理',
+              icon: 'team',
+            },
+            component: React.lazy(() => import('../pages/Sys/Demo')),
+          },
+          // {
+          //   path: '/auth/user',
+          //   meta: {
+          //     title: '用户管理',
+          //     icon: 'user',
+          //   },
+          //   component: React.lazy(() => import('../pages/Sys/Demo')),
+          // },
+        ],
+      },
 
       // 以下的路由改动请小心，涉及权限校验模块
       {
