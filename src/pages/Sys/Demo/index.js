@@ -8,7 +8,6 @@ class Demo extends Component {
   
   
   render() {
-    console.log('this.props',this.props);
     const  { counter } = this.props.demo
     return (
       <div>

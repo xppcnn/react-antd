@@ -13,11 +13,13 @@ const defaultApp = {
   routes: [],
   flattenRoutes: [],
   init: false,
+  currentUser: {},
 };
 
 const SET_SIDE_BAR_OPENED = 'SET_SIDE_BAR_OPENED';
 const SET_SIDE_BAR_ROUTES = 'SET_SIDE_BAR_ROUTES';
 const RMOVE_SIDE_BAR_ROUTES = 'RMOVE_SIDE_BAR_ROUTES';
+const SET_USER_INFO = 'SET_USER_INFO';
 
 export const updateSideBar = (sidebar) => ({
   type: SET_SIDE_BAR_OPENED,
@@ -32,6 +34,11 @@ export const setSideBarRoutes = (routes) => ({
 export const clearSideBarRoutes = () => ({
   type: RMOVE_SIDE_BAR_ROUTES,
   payload: null,
+});
+
+export const setUserInfo = (userInfo) => ({
+  type: SET_USER_INFO,
+  payload: userInfo,
 });
 
 const appReducer = (state = defaultApp, action) => {
@@ -59,6 +66,11 @@ const appReducer = (state = defaultApp, action) => {
         routes: [],
         flattenRoutes: [],
         init: false,
+      };
+    case SET_USER_INFO:
+      return {
+        ...state,
+        userInfo: payload
       };
 
     default:

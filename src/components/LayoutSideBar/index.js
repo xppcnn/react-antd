@@ -16,8 +16,6 @@ function LayoutSideBar({ location, theme, layout, sidebar, routes }) {
   }
   const title = getPageTitle(businessRouteList);
   const { pathname } = location;
-  console.log('pathname', pathname);
-
   return (
     <aside
       className={classnames(

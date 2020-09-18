@@ -8,8 +8,10 @@ import { LOGIN } from '@@/src/redux/actions/actiontype';
 // connect(state => ({user: state.user}))
 const Login = (props) => {
 
-  const handleLogin = (value) => {
-    props.dispatch({type: LOGIN, payload: value})
+  const handleLogin = async (value) => {
+     const res  = await props.dispatch({type: LOGIN, payload: value})
+     console.log('res',res);
+     
   }
   return (
     <div className="login">
@@ -23,4 +25,4 @@ const Login = (props) => {
   )
 }
 
-export default connect(state => ({user: state.user}))(Login)
+export default connect(state => ({login: state.login}))(Login)

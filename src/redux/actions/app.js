@@ -13,3 +13,5 @@ export const SWITCH_THEME = 'switchTheme'; // 改变主题。
 export const SWITCH_MENU_POPOVER = 'switchMenuPopover'; // 改变菜单显示隐藏。
 export const HANDLE_SUCCESS = 'handleSuccess'; // 处理成功。
 export const HANDLE_FAILED = 'handleFailed'; // 处理失败。
+export const GET_CURRENT_USER = 'GET_CURRENT_USER'; // 获取当前用户。
+export const SET_USER_INFO = 'SET_USER_INFO';

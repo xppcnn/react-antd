@@ -7,7 +7,6 @@ import AsyncRoutes from './AsyncRoutes';
 
 function renderRoute(route) {
   const title = getPageTitle(businessRouteList);
-  console.log('title',title);
   
   const { component: Component } = route;
 
@@ -18,10 +17,6 @@ function renderRoute(route) {
       path={route.path}
       render={props => (
         <Auth {...props} route={route}>
-          {/* <Helmet>
-            <title>{title}</title>
-            <meta name="description" content={title} />
-          </Helmet> */}
           <Component {...props} />
         </Auth>
       )}

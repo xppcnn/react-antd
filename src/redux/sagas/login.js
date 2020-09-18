@@ -3,7 +3,7 @@ import {
 } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import {
-  LOGIN, LOGOUT, UPDATE_PASSWORD, LOGIN_SUCCESS,
+  LOGIN, LOGOUT, UPDATE_PASSWORD, LOGIN_SUCCESS,GET_ACCOUNT_INFO
 } from '../actions/actiontype';
 import { UPDATE_STATE, HANDLE_SUCCESS, HANDLE_FAILED } from '../actions/app';
 import UserService from '@services/user';
@@ -106,11 +106,11 @@ export function* login() {
         auth: call(doLogin, { username, password }),
         logout: take(LOGOUT),
       });
-      console.log(winner)
       // If `authorize` was the winner...
       if (winner.auth) {
         // ...we send Redux appropiate actions
         yield put({ type: LOGIN_SUCCESS, payload: winner.auth.data }); // User is logged in (authorized)
+        yield put({ type: GET_ACCOUNT_INFO, payload: winner.auth.data }); // User is logged in (authorized)
         // yield put({ type: RESET_LOGIN_FORM, }); // Clear form
         // 显示loading 防止跳转过程中频繁提交表单
         yield put({ type: UPDATE_STATE, payload: { loading: true } });
@@ -126,7 +126,7 @@ export function* login() {
               // yield put(push(redirect));
             }
             resolve();
-          }, 2000);
+          }, 1000);
         });
         // 隐藏loading
         yield put({ type: UPDATE_STATE, payload: { loading: false } });

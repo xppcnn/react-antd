@@ -1,5 +1,8 @@
 import axios from 'axios';
 import { message, notification } from 'antd';
+import { getLocalStore } from '@utils/auth'
+
+const token = getLocalStore('TOKEN')
 
 const Axios = axios.create({
     // 默认的请求头
@@ -15,7 +18,14 @@ const Axios = axios.create({
  * request 拦截器
  */
 Axios.interceptors.request.use(
-    config => config,
+    config => {
+      if(token){
+        return { ...config,  headers : {
+          "Authorization": `Bearer ${token}`,
+        }}
+      }
+      return config
+    },
     (error) => {
         message.error('请求错误');
         return Promise.reject(error);
@@ -56,8 +66,6 @@ class ServerResponseSuccessManager {
      * @param response
      */
     codeParser(response) {
-      console.log('response',response);
-      
         const code = response?.data?.code;
         const resData = response?.data;
         const parser = {

@@ -1,14 +1,13 @@
 import React, { useCallback, memo } from 'react';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
-import {  updateSideBar } from '@redux/reducers/app';
+import { updateSideBar } from '@redux/reducers/app';
 import './index.less';
 import Hamburger from '../Hamburger';
 import Breadcrumb from '../Breadcrumb';
 import NavBarItem from './NavBarItem';
 import NoticeIcon from '../NoticeIcon';
 import AvatarDropdown from './AvatarDropdown';
-
 
 function LayoutNavBar({ sidebar, ActionUpdateSideBar, layout, theme }) {
   const onTrigger = useCallback(() => {
@@ -35,7 +34,10 @@ function LayoutNavBar({ sidebar, ActionUpdateSideBar, layout, theme }) {
         {/* 搜索暂时不做 */}
         {/* <Search></Search> */}
         <NavBarItem
-          className={classNames('layout__navbar__menu-item', `layout__navbar__menu-item--${theme}`)}
+          className={classNames(
+            'layout__navbar__menu-item',
+            `layout__navbar__menu-item--${theme}`
+          )}
           onClick={onHelpItemClick}
           icon="github"
           count={0}
@@ -44,7 +46,7 @@ function LayoutNavBar({ sidebar, ActionUpdateSideBar, layout, theme }) {
         <AvatarDropdown
           classNames={classNames(
             'layout__navbar__menu-item',
-            `layout__navbar__menu-item--${theme}`,
+            `layout__navbar__menu-item--${theme}`
           )}
         />
       </div>
@@ -61,5 +63,5 @@ export default connect(
   }),
   {
     ActionUpdateSideBar: updateSideBar,
-  },
+  }
 )(memo(LayoutNavBar));

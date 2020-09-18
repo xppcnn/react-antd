@@ -28,7 +28,9 @@
         padding: 0 15px;
         font-size: 16px;
         transition: background 0.2s;
-
+        &:hover {
+          background: burlywood;
+        }
         &--light {
           color: #333;
 
@@ -46,9 +48,12 @@
       }
     }
 
-    &__account {
+    &__username {
       margin-left: 10px;
       font-size: 12px;
+    }
+    &__account {
+      min-width: 100px;
     }
   }
 }

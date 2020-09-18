@@ -1,14 +1,26 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import classnames from 'classnames';
 import { Spin } from 'antd';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import './BaseLayout.less';
 import Sidebar from '@components/LayoutSideBar';
+import { GET_CURRENT_USER } from '@redux/actions/app';
 import Header from '../components/LayoutHeader';
 import LayoutSettings from '../components/LayoutSettings';
 import MainRoutes from './MainRoutes';
 
 function Layout(props) {
+  
+  useEffect(() => {
+    if(window.location.pathname === '/home'){
+      console.log('window.location.url',window.location.pathname);
+      props.dispatch({
+        type: GET_CURRENT_USER,
+      });
+    }
+    return () => {};
+  }, []);
+
   return (
     <>
       <section
@@ -24,10 +36,13 @@ function Layout(props) {
           <div
             className={classnames('layout__container', {
               'layout__container--fix': props.fixedHeader,
-              'layout__container--fixed': props.contentWidth === 'fixed' && props.layout === 'top',
+              'layout__container--fixed':
+                props.contentWidth === 'fixed' && props.layout === 'top',
             })}
           >
-            <Suspense fallback={<Spin size="large" className="layout__loading" />}>
+            <Suspense
+              fallback={<Spin size="large" className="layout__loading" />}
+            >
               <MainRoutes />
             </Suspense>
           </div>
@@ -39,10 +54,11 @@ function Layout(props) {
 }
 
 export default connect(
-  ({ settings: { layout, colorWeak, fixedHeader, contentWidth }}) => ({
+  ({ app, settings: { layout, colorWeak, fixedHeader, contentWidth } }) => ({
     layout,
+    app,
     colorWeak,
     fixedHeader,
     contentWidth,
-  }),
+  })
 )(Layout);

@@ -24,8 +24,9 @@ const loginReducer = (
         ...state,
       };
     case LOGIN_SUCCESS:
-      const { token } = action.payload;
+      const { token, userInfo } = action.payload;
       setLocalStore('TOKEN', token);
+      setLocalStore('userInfo', JSON.stringify(userInfo));
       message.success('登录成功');
       return {
         ...state,
@@ -45,7 +46,7 @@ const loginReducer = (
     case GET_ACCOUNT_INFO:
       return {
         ...state,
-        userInfo: action.payload,
+        userInfo: action.payload.userInfo,
       };
     default:
       return state;

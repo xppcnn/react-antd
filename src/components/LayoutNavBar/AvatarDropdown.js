@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom';
 import NavDropdown from './NavDropdown';
 import { clearSideBarRoutes } from '@redux/reducers/app';
 // import { setUserInfo } from '@redux/reducers/user';
-import { removeLocalStore } from '@utils/auth'
+import { removeLocalStore } from '@utils/auth';
 
 function renderManageUser(onMenuClick) {
   return (
@@ -33,13 +33,14 @@ function renderManageUser(onMenuClick) {
 }
 
 function AvatarDropdown(props) {
+  const { userInfo } = props;
   const history = useHistory();
 
   const onMenuClick = useCallback(({ key }) => {
     // console.log(key);
     message.success(key);
     if (key === 'logout') {
-      removeLocalStore('TOKEN')
+      removeLocalStore('TOKEN');
       // props.dispatch({
       //   type: 'SET_USER_LOGOUT',
       //   payload: { token: '', account: '', avatar: '', mobile: '', id: 0, role: 0 }
@@ -51,14 +52,19 @@ function AvatarDropdown(props) {
 
   return (
     <NavDropdown overlay={renderManageUser(onMenuClick)} trigger={['hover']}>
-      <div>
-        <Avatar size="small" className="layout__navbar__avatar"  alt="avatar" />
-        <span className="layout__navbar__account">徐维亮</span>
+      <div className="layout__navbar__account">
+        <Avatar
+          size="small"
+          className="layout__navbar__avatar"
+          src={userInfo?.avatar}
+          alt="avatar"
+        />
+        <span className="layout__navbar__username">{userInfo?.username}</span>
       </div>
     </NavDropdown>
   );
 }
 
-export default connect(({ user: { avatar, account } }) => ({ avatar, account }),{
+export default connect(({ app: { userInfo } }) => ({ userInfo }), {
   clearSideBarRoutes,
 })(memo(AvatarDropdown));

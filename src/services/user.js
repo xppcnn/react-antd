@@ -10,6 +10,10 @@ const UserApi = {
     method: "GET",
     url: '/api/user/menu',
   }),
+  getCurrentUser: () => request({
+    method: "GET",
+    url: '/api/user/userInfo',
+  }),
   logout: params => console.log(params),
   updatePassword: params => console.log(params),
 }
