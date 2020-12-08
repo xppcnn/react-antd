@@ -77,7 +77,7 @@ const routes = [
               title: '菜单管理',
               icon: 'menu',
             },
-            component: React.lazy(() => import('../pages/Sys/Demo')),
+            component: React.lazy(() => import('../pages/Sys/Menu')),
           },
           {
             path: '/auth/role',

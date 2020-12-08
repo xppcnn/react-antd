@@ -107,7 +107,7 @@ export function* login() {
         logout: take(LOGOUT),
       });
       // If `authorize` was the winner...
-      if (winner.auth) {
+      if (winner.auth.code === 1) {
         // ...we send Redux appropiate actions
         yield put({ type: LOGIN_SUCCESS, payload: winner.auth.data }); // User is logged in (authorized)
         yield put({ type: GET_ACCOUNT_INFO, payload: winner.auth.data }); // User is logged in (authorized)

@@ -10,8 +10,6 @@ const Login = (props) => {
 
   const handleLogin = async (value) => {
      const res  = await props.dispatch({type: LOGIN, payload: value})
-     console.log('res',res);
-     
   }
   return (
     <div className="login">
